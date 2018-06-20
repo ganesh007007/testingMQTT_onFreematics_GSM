@@ -84,6 +84,7 @@ void GSM_MQTT::_tcpInit(void)
         }
         else
         {
+          Serial.print("Modem still not initialized!!!");
           modemStatus = 0;
           break;
         }
