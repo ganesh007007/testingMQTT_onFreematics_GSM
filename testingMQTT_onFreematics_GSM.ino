@@ -1,14 +1,15 @@
 #include "GSM_MQTT.h"
 #include <SoftwareSerial.h>
-String MQTT_HOST = "test.mosquitto.org";
+//String MQTT_HOST = "test.mosquitto.org";
+String MQTT_HOST = "137.251.108.210";
 /*
    MQTT host address
 */
-String MQTT_PORT = "1883";
+String MQTT_PORT = "443";
 /*
    MQTT port
 */
-SoftwareSerial mySerial(10, 11); // RX, TX
+SoftwareSerial mySerial(16, 17); // RX, TX
 /*
    Software Serial through which mqtt events log is printed at 9600 baud rate
 */
@@ -79,7 +80,7 @@ void GSM_MQTT::OnConnect(void)
                     :Default value 0
   */
 
-  publish(0, 0, 0, _generateMessageID(), "SampleTopic", "Hello");
+  publish(0, 0, 0, _generateMessageID(), "OBD2", "Hello");
   /*  void publish(char DUP, char Qos, char RETAIN, unsigned int MessageID, char *Topic, char *Message);
       DUP       :This flag is set when the client or server attempts to re-deliver a PUBLISH message
                 :This applies to messages where the value of QoS is greater than zero (0)
@@ -122,9 +123,10 @@ GSM_MQTT MQTT(20);
 /*
    20 is the keepalive duration in seconds
 */
-
+  int msg_id = 0;
 void setup()
 {
+
   // initialize mqtt:
   // GSM modem should be connected to Harware Serial
   //  index =0;
@@ -141,8 +143,16 @@ void loop()
   /*
      You can write your code here
   */
+  
+  
+
+  if(msg_id == 100)
+  msg_id =0;
+  
   if (MQTT.available())
   {
+    MQTT.publish(0, 0, 0, msg_id, "OBD2", "Hello HI");
+    msg_id++;
     /*
       if you want to do something when mqtt connection is live.
       You can write your code here

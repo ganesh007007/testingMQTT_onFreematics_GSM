@@ -7,7 +7,7 @@
 #include "GSM_MQTT.h"
 #include "Arduino.h"
 #include <SoftwareSerial.h>
-#include <avr/pgmspace.h>
+#include "pgmspace.h"
 extern uint8_t GSM_Response;
 
 extern SoftwareSerial mySerial;
@@ -146,7 +146,7 @@ void GSM_MQTT::_tcpInit(void)
         {
           case 2:
             {
-              _sendAT("AT+CSTT=\"AIRTELGPRS.COM\"\r\n", 5000);
+              _sendAT("AT+CSTT=\"internet.t-mobile\"\r\n", 5000);
               break;
             }
           case 3:
@@ -668,7 +668,8 @@ void serialEvent()
           }
           else if (strstr(MQTT.inputString, "IP CONFIG") != 0)
           {
-            _delay_us(10);
+            //_delay_us(10);
+            delayMicroseconds(10);
             MQTT.GSM_ReplyFlag = 4;
           }
           else if (strstr(MQTT.inputString, " GPRSACT") != 0)

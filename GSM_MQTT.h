@@ -15,7 +15,8 @@
 
 #include "pins_arduino.h"
 
-#include <avr/pgmspace.h>
+#include "pgmspace.h"
+
 
 #define UART_BUFFER_LENGTH 300    //Maximum length allowed for UART data
 #define TOPIC_BUFFER_LENGTH 50    //Maximum length allowed Topic
