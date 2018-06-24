@@ -9,7 +9,7 @@ String MQTT_PORT = "443";
 /*
    MQTT port
 */
-SoftwareSerial mySerial(16, 17); // RX, TX
+SoftwareSerial mySerial(3, 1); // RX, TX
 /*
    Software Serial through which mqtt events log is printed at 9600 baud rate
 */
@@ -144,13 +144,14 @@ void loop()
      You can write your code here
   */
   
-  
+   mySerial.println("\nIn loop!!");
 
   if(msg_id == 100)
   msg_id =0;
   
   if (MQTT.available())
   {
+       mySerial.println("\nMQTT available!!");
     MQTT.publish(0, 0, 0, msg_id, "OBD2", "Hello HI");
     msg_id++;
     /*
